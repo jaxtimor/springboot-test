@@ -1,0 +1,61 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: 192.168.0.111:9300
+  datasource:
+#   数据源基本配置
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.0.111:3307/mall
+    type: com.alibaba.druid.pool.DruidDataSource
+#   数据源其他配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+#   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+#  redis:
+#    host: 192.168.0.113
+#    port: 6379
+#    password: 123456
+#    pool:
+#      max-active: 8
+#      max-wait: 6000
+#      max-idle: 8
+#      min-idle: 0
+#    timeout: 60000
+  rabbitmq:
+    host: 192.168.0.111
+    username: guest
+    password: guest
+    virtual-host: /
+  elasticsearch:
+    jest:
+      uris: http://192.168.0.111:9200
+
+logging:
+  config: src/main/resources/log4j.properties
+
+debug: true
+#mybatis:
+#  # 指定全局配置文件位置
+#  config-location: classpath:mybatis/mybatis-config.xml
+#  # 指定sql映射文件位置
+#  mapper-locations: classpath:mybatis/mapper/*.xml
+
+#    schema:
+#      - classpath:sql/department.sql
+#      - classpath:sql/employee.sql
